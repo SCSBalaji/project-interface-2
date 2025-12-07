@@ -5,7 +5,8 @@ Loads environment variables and provides configuration settings.
 import os
 import secrets
 from pathlib import Path
-from pydantic import BaseSettings, validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import field_validator
 from typing import List
 
 
@@ -44,16 +45,18 @@ class Settings(BaseSettings):
     # CORS Configuration
     FRONTEND_URL: str = "http://localhost:5173"
     
-    @validator('SECRET_KEY')
-    def validate_secret_key(cls, v, values):
-        """Ensure SECRET_KEY is changed in production."""
-        if not values.get('DEBUG', True) and len(v) < 32:
-            raise ValueError("SECRET_KEY must be at least 32 characters in production")
+    @field_validator('SECRET_KEY')
+    @classmethod
+    def validate_secret_key(cls, v: str) -> str:
+        """Ensure SECRET_KEY is at least 32 characters."""
+        if len(v) < 32:
+            raise ValueError("SECRET_KEY must be at least 32 characters")
         return v
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        case_sensitive=True
+    )
     
     def get_allowed_extensions(self) -> List[str]:
         """Get list of allowed file extensions."""
