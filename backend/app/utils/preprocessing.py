@@ -64,15 +64,15 @@ def validate_image(image: Image.Image, max_size: int = 10 * 1024 * 1024) -> bool
         True if valid, False otherwise
     """
     try:
-        # Check if image can be opened
-        image.verify()
-        
         # Check dimensions (minimum and maximum)
         width, height = image.size
         if width < 32 or height < 32:
             return False
         if width > 4096 or height > 4096:
             return False
+        
+        # Load image to ensure it's valid (verify() makes image unusable)
+        image.load()
         
         return True
     except Exception:

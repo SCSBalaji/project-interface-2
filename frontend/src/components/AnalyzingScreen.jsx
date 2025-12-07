@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
 import Header from './Header';
 import { predictionAPI } from '../services/api';
+import { ANALYSIS_STEPS } from '../config/constants';
 
 const AnalyzingScreen = () => {
   const navigate = useNavigate();
@@ -25,16 +26,8 @@ const AnalyzingScreen = () => {
 
   const analyzePlant = async () => {
     try {
-      // Simulate progress
-      const progressSteps = [
-        { progress: 20, status: 'Uploading image...', delay: 500 },
-        { progress: 40, status: 'Processing image...', delay: 800 },
-        { progress: 60, status: 'Running AI analysis...', delay: 1000 },
-        { progress: 80, status: 'Identifying disease...', delay: 1000 },
-        { progress: 95, status: 'Finalizing results...', delay: 500 },
-      ];
-
-      for (const step of progressSteps) {
+      // Simulate progress using configurable steps
+      for (const step of ANALYSIS_STEPS) {
         await new Promise(resolve => setTimeout(resolve, step.delay));
         setProgress(step.progress);
         setStatus(step.status);

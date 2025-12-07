@@ -3,8 +3,9 @@ Configuration module for the plant disease detection application.
 Loads environment variables and provides configuration settings.
 """
 import os
+import secrets
 from pathlib import Path
-from pydantic import BaseSettings
+from pydantic import BaseSettings, validator
 from typing import List
 
 
@@ -21,7 +22,7 @@ class Settings(BaseSettings):
     MONGODB_DB_NAME: str = "plant_disease_db"
     
     # JWT Configuration
-    SECRET_KEY: str = "your-secret-key-here-change-in-production"
+    SECRET_KEY: str = secrets.token_hex(32)  # Generate random key if not provided
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
@@ -42,6 +43,13 @@ class Settings(BaseSettings):
     
     # CORS Configuration
     FRONTEND_URL: str = "http://localhost:5173"
+    
+    @validator('SECRET_KEY')
+    def validate_secret_key(cls, v, values):
+        """Ensure SECRET_KEY is changed in production."""
+        if not values.get('DEBUG', True) and len(v) < 32:
+            raise ValueError("SECRET_KEY must be at least 32 characters in production")
+        return v
     
     class Config:
         env_file = ".env"

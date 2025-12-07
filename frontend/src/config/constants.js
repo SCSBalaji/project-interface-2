@@ -33,12 +33,25 @@ export const LANGUAGES = [
   { code: 'mr', name: 'Marathi', nativeName: 'मराठी' },
 ];
 
+// File upload configuration
+const MAX_FILE_SIZE_MB = 10;
+
 export const APP_CONFIG = {
-  MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
+  MAX_FILE_SIZE: MAX_FILE_SIZE_MB * 1024 * 1024, // 10MB in bytes
+  MAX_FILE_SIZE_MB,
   ALLOWED_FILE_TYPES: ['image/jpeg', 'image/jpg', 'image/png'],
   OTP_LENGTH: 6,
   OTP_EXPIRE_MINUTES: 5,
 };
+
+// Analysis progress simulation steps (configurable)
+export const ANALYSIS_STEPS = [
+  { progress: 20, status: 'Uploading image...', delay: 500 },
+  { progress: 40, status: 'Processing image...', delay: 800 },
+  { progress: 60, status: 'Running AI analysis...', delay: 1000 },
+  { progress: 80, status: 'Identifying disease...', delay: 1000 },
+  { progress: 95, status: 'Finalizing results...', delay: 500 },
+];
 
 export const MESSAGES = {
   en: {
