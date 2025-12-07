@@ -1,0 +1,46 @@
+# FastAPI Framework
+fastapi==0.109.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.18
+
+# PyTorch for Model Inference
+torch==2.6.0
+torchvision==0.21.0
+
+# Image Processing
+pillow==10.3.0
+opencv-python==4.8.1.78
+
+# Data Processing
+numpy==1.26.2
+
+# Validation
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Environment Variables
+python-dotenv==1.0.0
+
+# File Operations
+aiofiles==23.2.1
+
+# Database
+motor==3.3.2
+pymongo==4.6.0
+
+# Authentication & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.1.1
+
+# CORS
+python-cors==1.0.0
+
+# OTP Generation
+pyotp==2.9.0
+
+# HTTP Client (for OTP sending)
+httpx==0.25.1
+
+# Utilities
+python-dateutil==2.8.2
