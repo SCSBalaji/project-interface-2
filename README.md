@@ -19,12 +19,12 @@ A complete full-stack web application for plant disease detection using MobilePl
 ## 📦 Tech Stack
 
 ### Backend
-- **Framework**: FastAPI 0.104.1
+- **Framework**: FastAPI 0.109.1 (Security patched)
 - **Server**: Uvicorn
 - **Database**: MongoDB
-- **ML Framework**: PyTorch 2.1.0
+- **ML Framework**: PyTorch 2.6.0 (Security patched)
 - **Authentication**: JWT with OTP
-- **Image Processing**: Pillow, OpenCV
+- **Image Processing**: Pillow 10.3.0 (Security patched), OpenCV
 
 ### Frontend
 - **UI Framework**: React 18.2.0

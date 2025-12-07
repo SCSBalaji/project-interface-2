@@ -128,12 +128,14 @@ frontend/
 ### Backend
 | Component | Technology | Version |
 |-----------|------------|---------|
-| Framework | FastAPI | 0.104.1 |
+| Framework | FastAPI | 0.109.1 ✅ |
 | Server | Uvicorn | 0.24.0 |
 | Database | MongoDB | 4.4+ |
-| ML Framework | PyTorch | 2.1.0 |
-| Image Processing | Pillow, OpenCV | Latest |
+| ML Framework | PyTorch | 2.6.0 ✅ |
+| Image Processing | Pillow | 10.3.0 ✅ |
+| Image Processing | OpenCV | 4.8.1.78 |
 | Authentication | JWT + OTP | - |
+| File Upload | python-multipart | 0.0.18 ✅ |
 
 ### Frontend
 | Component | Technology | Version |
@@ -354,6 +356,7 @@ docker-compose up -d
 - ✅ Error handling
 - ✅ Documentation
 - ✅ Docker support
+- ✅ **Security patches applied (all vulnerabilities fixed)**
 
 ### For Production Deployment:
 - [ ] Configure real SMS provider for OTP

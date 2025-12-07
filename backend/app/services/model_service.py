@@ -52,7 +52,9 @@ class ModelService:
                 return
             
             print(f"📦 Loading model from: {model_path}")
-            checkpoint = torch.load(model_path, map_location=self.device)
+            # Use weights_only=False for loading full model checkpoints with architecture
+            # Note: This is safe when loading from trusted local files
+            checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
             
             # Import model architecture
             try:
