@@ -1,0 +1,4 @@
+# Place your model files here:
+# - mobileplant_vit_full_checkpoint.pth
+# - deployment_metadata.json
+# - classification_report.json

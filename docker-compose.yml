@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: plant_disease_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: plant_disease_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - plant_disease_network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: plant_disease_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DB_NAME: plant_disease_db
+      HOST: 0.0.0.0
+      PORT: 8000
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
+    networks:
+      - plant_disease_network
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: plant_disease_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - plant_disease_network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  plant_disease_network:
+    driver: bridge
